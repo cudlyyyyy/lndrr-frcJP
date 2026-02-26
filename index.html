@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScrollEarn - TikTokを見てお金を稼ごう</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-green: #0a2818;
+            --medium-green: #134d32;
+            --light-green: #1a6b47;
+            --accent-green: #00ff9d;
+            --accent-bright: #00ffaa;
+            --dark-bg: #071814;
+            --text-white: #ffffff;
+            --text-gray: #a8c5b8;
+            --error-red: #ff4466;
+            --shadow-color: rgba(0, 0, 0, 0.5);
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: radial-gradient(ellipse at top, #134d32 0%, #0a2818 50%, #071814 100%);
+            min-height: 100vh;
+            color: var(--text-white);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 420px;
+            margin: 0 auto;
+            padding: 15px;
+            position: relative;
+        }
+
+        header {
+            padding: 15px 0 5px;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 20px 0 15px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            animation: scaleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s backwards;
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .app-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+        }
+
+        .app-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .connector {
+            font-size: 1.5rem;
+            color: var(--accent-bright);
+            font-weight: 900;
+        }
+
+        .main-headline {
+            font-size: 2.2rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            letter-spacing: -0.01em;
+            color: var(--accent-bright);
+            animation: fadeIn 0.8s ease-out 0.4s backwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .subheadline {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-white);
+            margin-bottom: 20px;
+            font-weight: 400;
+            animation: fadeIn 0.8s ease-out 0.6s backwards;
+        }
+
+        .age-selection {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.8s ease-out 0.8s backwards;
+        }
+
+        .age-btn {
+            width: 100%;
+            padding: 16px 20px;
+            border-radius: 16px;
+            border: none;
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 1rem;
+            font-weight: 900;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .age-btn.primary {
+            background: var(--accent-bright);
+            color: #000;
+            box-shadow: 0 8px 25px rgba(0, 255, 170, 0.3);
+        }
+
+        .age-btn.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 255, 170, 0.5);
+        }
+
+        .age-btn.secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-white);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .age-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .btn-subtitle {
+            font-size: 0.72rem;
+            font-weight: 500;
+            opacity: 0.8;
+        }
+
+        .success-section {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .success-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .success-icon {
+            width: 55px;
+            height: 55px;
+            background: var(--accent-bright);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 1.8rem;
+            color: #000;
+            animation: successPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes successPop {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .success-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin-bottom: 8px;
+        }
+
+        .success-subtitle {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--text-gray);
+        }
+
+        .earning-highlight {
+            color: var(--accent-bright);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .cta-button {
+            width: 100%;
+            padding: 14px;
+            background: var(--accent-bright);
+            border: none;
+            border-radius: 12px;
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 1rem;
+            font-weight: 900;
+            color: #000;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            box-shadow: 0 8px 25px rgba(0, 255, 170, 0.3);
+            transition: all 0.3s ease;
+            margin: 18px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 255, 170, 0.5);
+        }
+
+        .journey-section {
+            margin: 18px 0 12px;
+        }
+
+        .journey-title {
+            font-size: 1rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            transition: all 0.3s ease;
+            animation: slideInLeft 0.6s ease-out backwards;
+        }
+
+        .step-card:nth-child(1) { animation-delay: 0.2s; }
+        .step-card:nth-child(2) { animation-delay: 0.35s; }
+        .step-card:nth-child(3) { animation-delay: 0.5s; }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .step-card.highlighted {
+            background: rgba(0, 255, 170, 0.05);
+            border: 2px solid var(--accent-bright);
+            box-shadow: 0 0 20px rgba(0, 255, 170, 0.15);
+        }
+
+        .step-icon-wrapper {
+            width: 35px;
+            height: 35px;
+            background: var(--accent-bright);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.1rem;
+            color: #000;
+        }
+
+        .step-card.highlighted .step-icon-wrapper {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 255, 170, 0.7); }
+            50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(0, 255, 170, 0); }
+        }
+
+        .step-content h3 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .step-content p {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            line-height: 1.4;
+        }
+
+        .notice-card {
+            background: linear-gradient(135deg, rgba(255, 68, 102, 0.15) 0%, rgba(255, 68, 102, 0.05) 100%);
+            border: 2px solid rgba(255, 68, 102, 0.5);
+            border-radius: 12px;
+            padding: 12px;
+            margin: 12px 0;
+            animation: fadeIn 0.8s ease-out 0.8s backwards;
+        }
+
+        .notice-badge {
+            display: inline-block;
+            background: var(--error-red);
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 900;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .notice-text {
+            font-size: 0.8rem;
+            line-height: 1.6;
+            color: var(--text-white);
+        }
+
+        .notice-text strong {
+            color: var(--error-red);
+        }
+
+        .trust-badge {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-gray);
+            margin: 12px 0 15px;
+            animation: fadeIn 1s ease-out 1s backwards;
+        }
+
+        .trust-badge strong {
+            color: var(--accent-bright);
+            font-weight: 700;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header></header>
+
+        <!-- ランディングページ -->
+        <div id="landingPage">
+            <div class="hero-section">
+                <div class="logo-container">
+                    <div class="app-icon">
+                        <img src="https://images.seeklogo.com/logo-png/37/2/tiktok-app-icon-logo-png_seeklogo-373800.png" alt="TikTok">
+                    </div>
+                    <div class="connector">×</div>
+                    <div class="app-icon">
+                        <img src="https://s3-eu-west-1.amazonaws.com/tpd/logos/6106a7e4f66385001d52966b/0x0.png" alt="ScrollEarn">
+                    </div>
+                </div>
+
+                <h1 class="main-headline">スクロールしてお金を稼ごう</h1>
+                
+                <p class="subheadline">
+                    TikTok動画を見るだけで毎日収益を得ている数千人のユーザーに参加して、すぐに現金を受け取りましょう。
+                </p>
+
+                <div class="age-selection">
+                    <button class="age-btn primary" onclick="showSuccessPage()">
+                        <span>21歳以上の方</span>
+                        <span class="btn-subtitle">即時出金対応：PayPal・暗号通貨・電信送金</span>
+                    </button>
+                    
+                    <button class="age-btn secondary" onclick="showSuccessPage()">
+                        <span>21歳未満の方</span>
+                        <span class="btn-subtitle">出金制限あり：電信送金のみ</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 成功ページ -->
+        <div id="successPage" class="hidden">
+            <div class="success-section">
+                <div class="success-header">
+                    <div class="logo-container">
+                        <div class="app-icon">
+                            <img src="https://images.seeklogo.com/logo-png/37/2/tiktok-app-icon-logo-png_seeklogo-373800.png" alt="TikTok">
+                        </div>
+                        <div class="connector">×</div>
+                        <div class="app-icon">
+                            <img src="https://s3-eu-west-1.amazonaws.com/tpd/logos/6106a7e4f66385001d52966b/0x0.png" alt="ScrollEarn">
+                        </div>
+                    </div>
+
+                    <div class="success-icon">✓</div>
+                    
+                    <h2 class="success-title">登録完了！</h2>
+                    
+                    <p class="success-subtitle">
+                        スマホの使用時間を収益に変えよう。最大 <span class="earning-highlight">週2,000ドル</span> 稼げます。
+                    </p>
+                </div>
+
+                <a href="https://glctrk.org/aff_c?offer_id=3533&aff_id=4344&source=ttfndeatgoo" class="cta-button" style="text-decoration: none;">
+                    <span>🍎</span>
+                    <span>稼ぎ始める</span>
+                </a>
+
+                <div class="journey-section">
+                    <h3 class="journey-title">収益獲得の手順</h3>
+
+                    <div class="step-card">
+                        <div class="step-icon-wrapper">👤</div>
+                        <div class="step-content">
+                            <h3>アカウントを作成する</h3>
+                            <p>登録するだけで即時5ドルのボーナス進呈</p>
+                        </div>
+                    </div>
+
+                    <div class="step-card highlighted">
+                        <div class="step-icon-wrapper">🎁</div>
+                        <div class="step-content">
+                            <h3>TikTokオファーを解除する</h3>
+                            <p>オファーを1つ完了してTikTokスクロールオファーを解除</p>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-icon-wrapper">💵</div>
+                        <div class="step-content">
+                            <h3>報酬を受け取る</h3>
+                            <p>PayPal・暗号通貨・銀行振込・ギフトカードで出金可能</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notice-card">
+                    <div class="notice-badge">重要</div>
+                    <p class="notice-text">
+                        <strong>有効化が必要：</strong> 新規ユーザーはTikTok動画での収益獲得を開始するために、2つのオファーを完了してフルアクセスを解除する必要があります。
+                    </p>
+                </div>
+
+                <div class="trust-badge">
+                    毎日収益を得ている <strong>50万人以上</strong> のユーザーから信頼されています
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSuccessPage() {
+            document.getElementById('landingPage').classList.add('hidden');
+            document.getElementById('successPage').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
