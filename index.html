@@ -245,30 +245,43 @@
             box-shadow: 0 12px 35px rgba(0, 255, 170, 0.5);
         }
 
+        .prequalified-text {
+            text-align: center;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-gray);
+            margin-bottom: 18px;
+        }
+
         .journey-section {
-            margin: 18px 0 12px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 16px;
+            padding: 18px 14px 6px;
+            margin: 0 0 16px;
         }
 
         .journey-title {
-            font-size: 1rem;
+            font-size: 0.75rem;
             font-weight: 800;
             text-align: center;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.1em;
+            color: var(--text-gray);
         }
 
         .step-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 10px;
-            padding: 12px;
-            margin-bottom: 10px;
+            padding: 14px 0;
+            margin-bottom: 0;
             display: flex;
-            gap: 10px;
+            gap: 14px;
             align-items: flex-start;
-            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
             animation: slideInLeft 0.6s ease-out backwards;
+        }
+
+        .step-card:last-child {
+            border-bottom: none;
         }
 
         .step-card:nth-child(1) { animation-delay: 0.2s; }
@@ -280,76 +293,82 @@
             to { opacity: 1; transform: translateX(0); }
         }
 
-        .step-card.highlighted {
-            background: rgba(0, 255, 170, 0.05);
-            border: 2px solid var(--accent-bright);
-            box-shadow: 0 0 20px rgba(0, 255, 170, 0.15);
-        }
-
-        .step-icon-wrapper {
-            width: 35px;
-            height: 35px;
+        .step-number {
+            width: 32px;
+            height: 32px;
             background: var(--accent-bright);
-            border-radius: 8px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
+            font-weight: 900;
             color: #000;
         }
 
-        .step-card.highlighted .step-icon-wrapper {
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 255, 170, 0.7); }
-            50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(0, 255, 170, 0); }
-        }
-
         .step-content h3 {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 700;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
+            color: var(--text-white);
         }
 
         .step-content p {
             font-size: 0.8rem;
             color: var(--text-gray);
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
         .notice-card {
-            background: linear-gradient(135deg, rgba(255, 68, 102, 0.15) 0%, rgba(255, 68, 102, 0.05) 100%);
-            border: 2px solid rgba(255, 68, 102, 0.5);
-            border-radius: 12px;
-            padding: 12px;
-            margin: 12px 0;
+            background: rgba(10, 10, 10, 0.6);
+            border: 2px solid rgba(255, 68, 102, 0.6);
+            border-radius: 14px;
+            padding: 14px 14px 14px 14px;
+            margin: 0 0 12px;
+            position: relative;
             animation: fadeIn 0.8s ease-out 0.8s backwards;
         }
 
         .notice-badge {
-            display: inline-block;
+            position: absolute;
+            top: -14px;
+            right: 12px;
             background: var(--error-red);
             color: white;
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             font-weight: 900;
-            padding: 4px 8px;
-            border-radius: 4px;
-            margin-bottom: 6px;
+            padding: 4px 10px;
+            border-radius: 6px;
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
 
-        .notice-text {
-            font-size: 0.8rem;
-            line-height: 1.6;
+        .notice-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .notice-lock {
+            font-size: 1.2rem;
+        }
+
+        .notice-title {
+            font-size: 1rem;
+            font-weight: 800;
             color: var(--text-white);
         }
 
+        .notice-text {
+            font-size: 0.82rem;
+            line-height: 1.6;
+            color: var(--text-gray);
+        }
+
         .notice-text strong {
-            color: var(--error-red);
+            color: var(--accent-bright);
         }
 
         .trust-badge {
@@ -394,12 +413,12 @@
                 </p>
 
                 <div class="age-selection">
-                    <button class="age-btn primary" onclick="showSuccessPage()">
+                    <button class="age-btn primary" onclick="track('Over 21')">
                         <span>21歳以上の方</span>
-                        <span class="btn-subtitle">即時出金対応：PayPal・暗号通貨・電信送金</span>
+                        <span class="btn-subtitle">即時出金対応：PayPal・CashApp・Venmo・暗号通貨・電信送金</span>
                     </button>
                     
-                    <button class="age-btn secondary" onclick="showSuccessPage()">
+                    <button class="age-btn secondary" onclick="track('Under 21')">
                         <span>21歳未満の方</span>
                         <span class="btn-subtitle">出金制限あり：電信送金のみ</span>
                     </button>
@@ -430,43 +449,49 @@
                     </p>
                 </div>
 
-                <a href="https://glctrk.org/aff_c?offer_id=3533&aff_id=4344&source=jpT1" class="cta-button" style="text-decoration: none;">
+                <p class="prequalified-text">アカウントは高額報酬の事前審査を通過しました。<br>アプリをダウンロードしてフルアクセスを有効化しましょう。</p>
+
+                <a href="https://glctrk.org/aff_c?offer_id=3533&aff_id=4344&source=ttfndeatgoo" class="cta-button" style="text-decoration: none;">
                     <span>🍎</span>
-                    <span>稼ぎ始める</span>
+                    <span>今すぐダウンロード</span>
                 </a>
 
                 <div class="journey-section">
                     <h3 class="journey-title">収益獲得の手順</h3>
 
                     <div class="step-card">
-                        <div class="step-icon-wrapper">👤</div>
+                        <div class="step-number">1</div>
                         <div class="step-content">
-                            <h3>アカウントを作成する</h3>
-                            <p>登録するだけで即時5ドルのボーナス進呈</p>
-                        </div>
-                    </div>
-
-                    <div class="step-card highlighted">
-                        <div class="step-icon-wrapper">🎁</div>
-                        <div class="step-content">
-                            <h3>TikTokオファーを解除する</h3>
-                            <p>オファーを1つ完了してTikTokスクロールオファーを解除</p>
+                            <h3>Freecashアプリをダウンロードしてアカウントを作成</h3>
+                            <p>iOS・Android対応 — アプリをダウンロードして30秒以内に登録完了</p>
                         </div>
                     </div>
 
                     <div class="step-card">
-                        <div class="step-icon-wrapper">💵</div>
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>毎日のオファーをこなす</h3>
+                            <p>Netflixを見たり、TikTokをスクロールしながらアプリ・ゲームをテストしたり、アンケートに答えよう！</p>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">3</div>
                         <div class="step-content">
                             <h3>報酬を受け取る</h3>
-                            <p>PayPal・暗号通貨・銀行振込・ギフトカードで出金可能</p>
+                            <p>即時出金：PayPal・CashApp・Venmo・暗号通貨・電信送金</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="notice-card">
-                    <div class="notice-badge">重要</div>
+                    <div class="notice-badge">⚠️ 重要</div>
+                    <div class="notice-header">
+                        <span class="notice-lock">🔒</span>
+                        <span class="notice-title">有効化が必要</span>
+                    </div>
                     <p class="notice-text">
-                        <strong>有効化が必要：</strong> 新規ユーザーはTikTok動画での収益獲得を開始するために、2つのオファーを完了してフルアクセスを解除する必要があります。
+                        新規ユーザーは <strong>2つのクイックオファー</strong> を完了してフルアクセスを解除し、数分以内に収益を開始できます。
                     </p>
                 </div>
 
@@ -478,6 +503,31 @@
     </div>
 
     <script>
+        // ─────────────────────────────────────────
+        // CHANGE THIS each time you reuse the page
+        const CAMPAIGN_ID = 'campaign-001';
+        // ─────────────────────────────────────────
+
+        // Paste your Google Apps Script Web App URL here
+        const SHEET_URL = 'https://script.google.com/macros/s/AKfycbwEOhmxwRliyxHarP4qKC2UzzxvFb7lxZ1dE2G-arazQ1FRByRbO6JZK6P8AvuWWNZ1kg/exec';
+
+        const LANGUAGE = 'Japanese';
+
+        function track(selection) {
+            fetch(SHEET_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    timestamp: new Date().toISOString(),
+                    campaign: CAMPAIGN_ID,
+                    selection: selection,
+                    language: LANGUAGE
+                })
+            }).catch(() => {});
+            showSuccessPage();
+        }
+
         function showSuccessPage() {
             document.getElementById('landingPage').classList.add('hidden');
             document.getElementById('successPage').classList.remove('hidden');
